@@ -46,7 +46,7 @@ Este projeto Flutter combina funcionalidades de listagem, cadastro e edição de
    
 4. **Rode o projeto**:
    ```bash
-   flutter pub get
+   flutter run
    ```
    
 5. **Selecione o dispositivo: Certifique-se de que um emulador ou dispositivo físico esteja conectado.**
