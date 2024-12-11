@@ -38,7 +38,7 @@ Este projeto Flutter combina funcionalidades de listagem, cadastro e edição de
 
 2. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seuusuario/projeto-gerenciamento-usuarios.git
+   git clone https://github.com/theyanwillian/crud_avatar
    cd projeto-gerenciamento-usuarios
    ```
    
