@@ -28,10 +28,7 @@ Este projeto Flutter combina funcionalidades de listagem, cadastro e edição de
       ```bash
       flutter --version
       ```
-    - Atualize se necessário:
-      ```bash
-      flutter upgrade
-      ```
+    - Faça o Download da versão requerida se necessário
 
 2. **Clone o repositório**:
    ```bash
