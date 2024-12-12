@@ -2,7 +2,6 @@
 
 Este projeto Flutter combina funcionalidades de listagem, cadastro e edição de usuários, incluindo uma experiência visual interativa para a seleção de avatares. Ideal para aplicações que requerem personalização de perfil e gerenciamento de dados de usuários.
 
----
 
 ## 📋 Funcionalidades
 - 🗂️ **Listagem de Usuários**: Exibe uma lista com os dados dos usuários cadastrados.
@@ -12,7 +11,6 @@ Este projeto Flutter combina funcionalidades de listagem, cadastro e edição de
 - 🔄 **Estado Dinâmico**: A seleção de avatares reflete em tempo real, com feedback visual.
 - 🌐 **URLs de Rede para Avatares**: Carregamento dinâmico de imagens a partir de URLs.
 
----
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -20,7 +18,6 @@ Este projeto Flutter combina funcionalidades de listagem, cadastro e edição de
 - **Flutter**: Framework para desenvolvimento multiplataforma.
 - **Widgets Personalizados**: Criação de componentes como `SelectableAvatar` e `AvatarSelector`.
 
----
 
 ## 🛠️ Como Configurar o Projeto
 
@@ -38,7 +35,7 @@ Este projeto Flutter combina funcionalidades de listagem, cadastro e edição de
 
 2. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seuusuario/projeto-gerenciamento-usuarios.git
+   git clone https://github.com/theyanwillian/projeto-gerenciamento-usuarios
    cd projeto-gerenciamento-usuarios
    ```
    
@@ -49,7 +46,7 @@ Este projeto Flutter combina funcionalidades de listagem, cadastro e edição de
    
 4. **Rode o projeto**:
    ```bash
-   flutter pub get
+   flutter run
    ```
    
 5. **Selecione o dispositivo: Certifique-se de que um emulador ou dispositivo físico esteja conectado.**
