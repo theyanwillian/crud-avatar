@@ -20,12 +20,14 @@ class UserTile extends StatelessWidget {
             backgroundColor: Colors.transparent,
           );
     return ListTile(
+      contentPadding: const EdgeInsets.only(left: 20, right: 8),
       leading: avatar,
-      title: user.name != null ?  Text(user.name!) : Text('Não encontrado'),
-      subtitle: user.email != null ?  Text(user.email!) : Text('Não encontrado'),
+      title: user.name != null ?  Text(user.name!) : const Text('Não encontrado'),
+      subtitle: user.email != null ?  Text(user.email!) : const Text('Não encontrado'),
       trailing: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.25,
+        width: MediaQuery.of(context).size.width * 0.22,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             IconButton(
               onPressed: () => Navigator.pushNamed(context, AppRoutes.USER_FORM, arguments: user),
@@ -37,21 +39,21 @@ class UserTile extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (ctx) => AlertDialog(
-                    title: Text('Tem certeza que deseja excluir?'),
-                    content: user.name != null ?  Text(user.name!) : Text('Não encontrado'),
+                    title: const Text('Tem certeza que deseja excluir?'),
+                    content: user.name != null ?  Text(user.name!) : const Text('Não encontrado'),
                     actions: [
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text("Não"),
+                        child: const Text("Não"),
                       ),
                       TextButton(
                         onPressed: () {
                           Provider.of<UsersProvider>(context, listen: false).remove(user.id);
                           Navigator.of(context).pop();
                         },
-                        child: Text("Sim"),
+                        child: const Text("Sim"),
                       )
                     ],
                   ),

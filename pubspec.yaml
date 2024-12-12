@@ -38,6 +38,7 @@ dependencies:
   provider: ^6.0.3
   animated_toggle_switch: ^0.8.3
   brasil_fields: ^1.15.0
+  toastification: ^2.3.0
 
 dev_dependencies:
   flutter_test:

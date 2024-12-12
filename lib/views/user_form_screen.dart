@@ -5,6 +5,7 @@ import 'package:projeto_login/providers/users_provider.dart';
 import 'package:projeto_login/utils/colors.dart';
 import 'package:projeto_login/utils/validators.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 
 class UserFormScreen extends StatelessWidget {
   final _form = GlobalKey<FormState>();
@@ -107,6 +108,31 @@ class UserFormScreen extends StatelessWidget {
                         ),
                       );
                       Navigator.of(context).pop();
+                      toastification.show(
+                        context: context,
+                        type: ToastificationType.success,
+                        style: ToastificationStyle.fillColored,
+                        autoCloseDuration: const Duration(seconds: 5),
+                        title: const Text('Cadastro Realizado com Sucesso'),
+                        alignment: Alignment.topCenter,
+                        direction: TextDirection.ltr,
+                        animationDuration: const Duration(milliseconds: 300),
+                        icon: const Icon(Icons.check),
+                        showIcon: true,
+                        primaryColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0x07000000),
+                            blurRadius: 16,
+                            offset: Offset(0, 16),
+                            spreadRadius: 0,
+                          )
+                        ],
+                      );
                     }
                   },
                   icon: const Icon(Icons.save),

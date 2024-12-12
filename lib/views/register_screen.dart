@@ -2,7 +2,9 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projeto_login/components/gradiente_background.dart';
+import 'package:projeto_login/models/user.dart';
 import 'package:projeto_login/providers/theme_provider.dart';
+import 'package:projeto_login/providers/users_provider.dart';
 import 'package:projeto_login/utils/validators.dart';
 import 'package:provider/provider.dart';
 
@@ -61,6 +63,8 @@ class AuthForm extends StatelessWidget {
   const AuthForm({required this.formKey});
   @override
   Widget build(BuildContext context) {
+    final Map<String, String?> _formData = {};
+
     return Container(
       padding: EdgeInsets.all(24),
       child: Form(
@@ -77,7 +81,7 @@ class AuthForm extends StatelessWidget {
                 if (name == null || name.isEmpty) return 'Campo Obrigatório';
                 return null;
               },
-              onSaved: (name) {},
+              onSaved: (name) => name != null ? _formData['name'] = name : null,
             ),
             const SizedBox(height: 8),
             TextFormField(
@@ -87,7 +91,7 @@ class AuthForm extends StatelessWidget {
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: validateEmail,
-              onSaved: (email) {},
+              onSaved: (email) => email != null ? _formData['email'] = email : null,
             ),
             const SizedBox(height: 8),
             TextFormField(
@@ -105,6 +109,14 @@ class AuthForm extends StatelessWidget {
               onPressed: () {
                 if (formKey.currentState != null && formKey.currentState!.validate()) {
                   formKey.currentState?.save();
+                  Provider.of<UsersProvider>(context, listen: false).put(
+                    User(
+                      id: _formData['id'],
+                      name: _formData['name'],
+                      email: _formData['email'],
+                      avatarUrl: _formData['avatarUrl'],
+                    ),
+                  );
                   showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
