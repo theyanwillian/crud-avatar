@@ -1,11 +1,13 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:projeto_login/components/gradiente_background.dart';
 import 'package:projeto_login/providers/theme_provider.dart';
+import 'package:projeto_login/utils/validators.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class RegisterScreen extends StatelessWidget {
                         fit: BoxFit.fitWidth,
                       ),
                       const SizedBox(height: 50),
-                      AuthForm(),
+                      AuthForm(formKey: _formKey),
                     ],
                   ),
                 ),
@@ -54,11 +56,15 @@ class RegisterScreen extends StatelessWidget {
 }
 
 class AuthForm extends StatelessWidget {
+  final GlobalKey<FormState> formKey;
+
+  const AuthForm({required this.formKey});
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(24),
       child: Form(
+        key: formKey,
         child: Column(
           children: [
             TextFormField(
@@ -66,6 +72,11 @@ class AuthForm extends StatelessWidget {
                 prefixIcon: Icon(Icons.person_outline),
                 labelText: 'Nome',
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (name) {
+                if (name == null || name.isEmpty) return 'Campo Obrigatório';
+                return null;
+              },
               onSaved: (name) {},
             ),
             const SizedBox(height: 8),
@@ -74,35 +85,43 @@ class AuthForm extends StatelessWidget {
                 prefixIcon: Icon(Icons.lock_outline),
                 labelText: 'Email',
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: validateEmail,
               onSaved: (email) {},
             ),
             const SizedBox(height: 8),
             TextFormField(
               decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.lock_outline),
+                prefixIcon: Icon(Icons.phone),
                 labelText: 'Telefone',
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: validateMobile,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly, TelefoneInputFormatter()],
               onSaved: (phone) {},
             ),
             const SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                    title: Text('Solicitação confirmada!'),
-                    content: Text('Em breve você recebera mais informações no seu e-mail'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                        },
-                        child: Text("Ok"),
-                      )
-                    ],
-                  ),
-                );
+                if (formKey.currentState != null && formKey.currentState!.validate()) {
+                  formKey.currentState?.save();
+                  showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: const Text('Solicitação confirmada!'),
+                      content: const Text('Em breve você recebera mais informações no seu e-mail'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("Ok"),
+                        )
+                      ],
+                    ),
+                  );
+                }
               },
               child: const Text('Solicitar acesso'),
             )
@@ -112,3 +131,4 @@ class AuthForm extends StatelessWidget {
     );
   }
 }
+

@@ -3,6 +3,7 @@ import 'package:projeto_login/components/avatar_selector.dart';
 import 'package:projeto_login/models/user.dart';
 import 'package:projeto_login/providers/users_provider.dart';
 import 'package:projeto_login/utils/colors.dart';
+import 'package:projeto_login/utils/validators.dart';
 import 'package:provider/provider.dart';
 
 class UserFormScreen extends StatelessWidget {
@@ -49,6 +50,7 @@ class UserFormScreen extends StatelessWidget {
                       prefixIcon: Icon(Icons.person_outline),
                       labelText: 'Nome',
                     ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (name) {
                       if (name == null || name.isEmpty) return 'Campo Obrigatório';
                       return null;
@@ -62,10 +64,8 @@ class UserFormScreen extends StatelessWidget {
                       prefixIcon: Icon(Icons.lock_outline),
                       labelText: 'Email',
                     ),
-                    validator: (email) {
-                      if (email == null || email.isEmpty) return 'Campo Obrigatório';
-                      return null;
-                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: validateEmail,
                     onSaved: (email) => email != null ? _formData['email'] = email : null,
                   ),
                   const SizedBox(height: 28),
